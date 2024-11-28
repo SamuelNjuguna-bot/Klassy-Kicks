@@ -1,0 +1,75 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      row-gap: 100px;
+      column-gap: 20px;
+    }
+  .div1{
+    max-width: 600px;
+    max-height: 400px;
+  }
+    .div1 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .body{
+      height: 1200px;
+    }
+    .payment{
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      color: white;
+      padding: 50px;
+      margin-top: 200px;
+      border-radius: 5px;
+    }
+    .price{
+      margin-top: 100px;
+      font-size: 30px;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body class="body">
+  <p>Hello {{user}} This are your items</p>
+
+  <div class="main">
+    {% for item in cartitems%}
+    <div class="div1"><img src="{{item.cart_product.upload.url}}">
+      <p>quantity: {{item.quantity}} X {{item.total_price}}
+      </p>
+    
+      <a href="{% url 'removeitem' item.id%}" style="text-decoration: none;">Remove item from cart</a>
+    </div>
+    {% endfor %}
+
+  </div>
+  
+  <div class="price">
+     <p>Total price: Ksh{{total}}
+  </p>
+  <form method="get" action="location">
+    <p>Please Enter your location of delivery after payment</p>
+    <input type="text" name="location">
+    <input type="submit" value="Enter">
+  </form>
+</div>
+
+<div class="payment"><img src="{{logo}}" style="width: 400px;"></p></div>
+<a href="http://127.0.0.1:8000/chatspace" style="margin-top: 29px; background-color: blue; text-decoration: none;">Chat with Us</a>
+
+
+</body>
+
+</html>

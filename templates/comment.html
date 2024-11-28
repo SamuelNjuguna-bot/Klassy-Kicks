@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>All Comments</h2>
+    <ul id="comments-list">
+        {% for com in comment %}
+            <li>{{ com.comment }} </li>
+        {% endfor %}
+       
+    </ul>
+    <a href="http://127.0.0.1:8000/clear">CLear Comments</a>
+</body>
+</html> 

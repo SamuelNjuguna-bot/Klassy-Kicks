@@ -1,0 +1,124 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{gen}}</title>
+    <style>
+        .header {
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .headerh1 {
+
+            display: flex;
+            justify-content: center;
+
+
+
+
+        }
+
+        .imgl {
+            width: 500px;
+            object-fit: cover;
+            border-radius: 50px;
+        }
+
+        /* @keyframes fadeInOut {
+     0% {
+         opacity: 0;
+     }
+
+     50% {
+         opacity: 1;
+     }
+
+     100% {
+         opacity: 0;
+     }
+ } */
+
+        .sport {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            column-gap: 1px;
+            row-gap: 1px;
+
+
+        }
+
+        .sport p {
+            text-align: center;
+        }
+
+        .div2 {
+            background-color: rgba(240, 248, 255, 0.753);
+            border-radius: 0px;
+            max-width: 400px;
+            max-height: 550px;
+            margin: 5px;
+            padding-bottom: 130px;
+        }
+
+        .div2 img {
+            width: 400px;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .sportsheader {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .body {
+            height: 4000px;
+            background-color: #ccc;
+        }
+
+        .search {
+            float: left;
+
+        }
+
+        .input {
+            padding: 15px;
+            border-radius: 20px;
+        }
+    </style>
+    {% load static %}
+</head>
+
+<body class="body">
+    <div class="header">
+        <div class="headerh1">
+            <a href="http://127.0.0.1:8000/aboutus" target="_blank"><img src="{{logo}}" class="imgl"></a>
+        </div>
+        <a href="http://127.0.0.1:8000/logout" style="float: right; text-decoration: none; font-size: 30px;">Log Out</a>
+        {% if user.is_authenticated %}
+        <a href="http://127.0.0.1:8000/viewcart/shirt"
+            style="float: right; text-decoration: none; font-size: 30px; margin-right: 15px; background-color: #FF1493; border-radius: 5px; color: white;">My
+            Cart</a>
+        {% endif %}
+    </div>
+    <div class="sport">
+        {% for item in results %}
+        <div class="div2">
+            <img src="{{item.upload.url}}" alt="img">
+            <p>Price(Ksh):{{item.price}}</p>
+            <p>Available in: {{item.color}}</p>
+            <p>size : {{item.size}}</p>
+            <p>For: {{item.sex}}</p>
+            <a href="{% url 'add_to_cart' 'shirt' item.id %}" style="margin-left: 145px; text-decoration: none;">Add To
+                Cart</a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</body>
+
+</html>

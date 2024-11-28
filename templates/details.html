@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More details</title>
+    <style>
+        .details{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+        .details img{
+            border-radius: 20px;
+        }
+        .inner{
+            
+            text-align: center; 
+        }
+        body{
+             background-color: #ccc;
+             height: 1000px;
+        }
+        .div1 img{
+            width: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="details">
+        {% for item in details%}
+        <div class="div1">
+          <img src="{{item.upload.url}}" alt="img" class="img">
+          <div class="inner">
+            <p style="color: #FF1493; font-size:30px;">{{item.shoename}}</p>
+            <p style="color: #FF1493; font-size:30px;">{{item.name}}</p>
+            <p> Price(Ksh): {{item.price}}</p>
+            <p>size : {{item.size}}</p>
+            <p>For:{{item.sex}}</p>
+            <a href="{% url 'add_to_cart' name item.id %}">Add to Bag</a>
+          </div>
+        
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

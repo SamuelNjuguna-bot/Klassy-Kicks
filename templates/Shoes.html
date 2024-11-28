@@ -1,0 +1,246 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .header {
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .headerh1 {
+
+            display: flex;
+            justify-content: center;
+
+
+
+
+        }
+
+        .imgl {
+            width: 500px;
+            object-fit: cover;
+            border-radius: 50px;
+        }
+/* 
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        } */
+
+        .sport {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            column-gap: 1px;
+            row-gap: 1px;
+            margin-bottom: 60px;
+
+
+
+        }
+
+        .sport p {
+            font-size: 20px;
+            font-weight: 10px;
+            text-align: center;
+        }
+
+
+        .sport a {
+
+            text-decoration: none;
+            margin-left: 150px;
+            justify-content: center;
+
+        }
+
+        .sport a :hover {
+            background-color: rgb(255, 197, 207);
+            box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .div1 {
+            background-color: rgba(240, 248, 255, 0.753);
+
+
+            border-radius: 0px;
+            max-width: 400px;
+            max-height: 600px;
+            margin: 5px;
+            padding-bottom: 60px;
+
+        }
+
+        .div1 img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+
+        }
+
+        .sportsheader {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .body {
+            height: 4000px;
+            background-color: #ccc;
+        }
+
+        .search {
+            float: left;
+            border: none;
+
+        }
+
+        .input {
+            padding: 10px;
+            border-radius: 20px;
+            margin-right: 0;
+        }
+
+        .btn {
+            margin: 30px;
+            display: flex;
+            align-items: center !important;
+            justify-content: center;
+        }
+
+        .btn a {
+            
+            background-color: #ccc;
+            border: none;
+            display: flex;
+            color: #FF1493;
+            align-items: center !important;
+            justify-content: center !important;
+            text-decoration: none;
+
+
+
+
+        }
+
+        .btn a:hover {
+            background-color: #FF1493;
+            padding-left: 0px;
+            padding-right: 0px;
+            cursor: pointer;
+            border-radius: 10px;
+            color: whitesmoke;
+        }
+    </style>
+    {% load static%}
+</head>
+
+<body class="body">
+    <div class="header">
+        <div class="headerh1">
+            <a href="http://127.0.0.1:8000/aboutus" target="_blank"><img src="{{lg}}" class="imgl"></a>
+        </div>
+        <div class="btn">
+            <a href="http://127.0.0.1:8000/shoesearch/male">Men's Category</a>
+        </div>
+        <div class="btn"><a href="http://127.0.0.1:8000/shoesearch/female">Women's Category</a></div>
+    </div>
+    <form method="get" action="search">
+
+        <input class="input" name="searchshoe" placeholder="Search item by ..." required>
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    </div>
+    <a href="http://127.0.0.1:8000/logout" style="float: right;">Log Out</a>
+    {%if user.is_authenticated%}
+    <a href="http://127.0.0.1:8000/viewcart/shoes" style="float: right; margin-right: 20px; text-decoration: none;">My
+        bag</a>
+    {%endif%}
+    </div>
+    <div class="sportheader">
+        <p style="color: rgba(0, 0, 0, 0.829); font-size: 30px;"> Category: Sneakers</p>
+    </div>
+    <div class="sport">
+
+        {% for item in sneaker%}
+        <div class="div1">
+            <a href="{% url 'details' 'shoes' item.id %}" target="_blank" style="margin-left: 0;"><img
+                    src="{{item.upload.url}}" alt="img" class="img"></a>
+            <p style="color: #FF1493; font-size:30px;">{{item.shoename}}</p>
+            <p> Price(Ksh): {{item.price}}</p>
+            <p>size : {{item.size}}</p>
+            <p>For:{{item.sex}}</p>
+            <a href="{% url 'add_to_cart' 'shoes' item.id %}">Add to Bag</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="sportheader">
+        <p style="color: rgba(0, 0, 0, 0.829); font-size: 30px;">Category: official</p>
+    </div>
+    <div class="sport">
+        {% for item in official%}
+        <div class="div1">
+            <a href="{% url 'details' 'shoes' item.id %}" target="_blank" style="margin-left: 0;"><img
+                    src="{{item.upload.url}}" alt="img" class="img"></a>
+            <p style="color: #383333; font-size:30px;">{{item.shoename}}</p>
+            <p> Price(Ksh): {{item.price}}</p>
+            <p>size : {{item.size}}</p>
+            <p>For:{{item.sex}}</p>
+
+            <a href="{% url 'add_to_cart' 'shoes' item.id %}">Add to Bag</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="sportheader">
+        <p style="color: rgba(0, 0, 0, 0.829); font-size: 30px;"> Category: Sport</p>
+    </div>
+    <div class="sport">
+
+        {% for item in sport%}
+        <div class="div1">
+            <a href="{% url 'details' 'shoes' item.id %}" target="_blank" style="margin-left: 0;"><img
+                    src="{{item.upload.url}}" alt="img" class="img"></a>
+            <p style="color:green; font-size: 30px;">{{item.shoename}}</p>
+            <p> Price(Ksh): {{item.price}}</p>
+            <p>size : {{item.size}}</p>
+            <p>For:{{item.sex}}</p>
+            <a href="{% url 'add_to_cart' 'shoes' item.id %}">Add to Bag</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="sportheader">
+        <p style="color: rgba(0, 0, 0, 0.829); font-size: 30px;">Category: Boots</p>
+    </div>
+    <div class="sport">
+
+        {% for item in boots%}
+        <div class="div1">
+            <a href="{% url 'details' 'shoes' item.id %}" target="_blank" style="margin-left: 0;"><img
+                    src="{{item.upload.url}}" alt="img" class="img"></a>
+            <p style="color: brown; font-size: 30px;">{{item.shoename}}</p>
+            <p> Price(Ksh): {{item.price}}</p>
+            <p>size : {{item.size}}</p>
+            <p>For:{{item.sex}}</p>
+            <a href="{% url 'add_to_cart' 'shoes' item.id %}">Add to Bag</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

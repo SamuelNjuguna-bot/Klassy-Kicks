@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <style>
+        .body {
+            height: 1400px;
+        }
+        .main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds space between rows */
+}
+
+.cart-row {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ccc; /* Adds a border around each row */
+    padding: 10px;
+    margin-bottom: 10px; /* Adds space between rows */
+    background-color: #f9f9f9; /* Optional: Adds a background color */
+}
+
+.cart-user, .cart-details, .cart-total {
+    margin-right: 20px; /* Adds space between columns */
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item img {
+    margin-left: 10px; /* Adds space between text and image */
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+    </style>
+</head>
+
+<body class="body">
+    <div class="main">
+        <div class="inner">
+            {% for entry in cart %}
+            <div class="cart-row">
+                <div class="cart-user">
+                    <h3>Customer: {{ entry.user.username }}</h3>
+                </div>
+    
+                <div class="cart-details">
+                    {% for item in entry.cart_products %}
+                    <div class="cart-item">
+                        <p>{{ item.quantity }} X {{ item.cart_product.price }} </p>
+                        <p>{{item.cart_product.name}}</p>
+                        <p>{{item.cart_product.size}}</p>
+                        <p>{{item.cart_product.shoename}}</p>
+                        <img src="{{ item.cart_product.upload.url }}">
+                    </div>
+                    {% endfor %}
+                </div>
+    
+                <div class="cart-total">
+                    <p><strong>Total: {{ entry.total }}</strong></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+
+
+</body>
+
+</html>
